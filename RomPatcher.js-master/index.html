@@ -1,54 +1,69 @@
 <!DOCTYPE html>
 <html translate="no">
 <head>
-	<title>Wario Land 4 - ม็อดแปลไทย</title>
+	<title>Wario Land 4 (ภาษาไทย) - Rom Patcher</title>
 	<meta http-equiv="content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="description" content="An online web-based ROM patcher. Supported formats: IPS, BPS, UPS, APS, RUP, EBP, PPF and xdelta."/>
-	<meta name="keywords" content="ips,ups,aps,bps,rup,ninja,ebp,ppf,xdelta,patcher,online,html5,web,rom,patch,hack,translation"/>
+	<meta name="description" content="An online web-based ROM patcher for Wario Land 4 (Thai)."/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 	<link rel="manifest" href="./manifest.json"/>
 	<link rel="shortcut icon" href="./webapp/app_icon_16.png" type="image/png" sizes="16x16"/>
 	<link rel="shortcut icon" href="./webapp/app_icon_192.png" type="image/png" sizes="192x192"/>
-	<!-- iOS icons -->
-	<link rel="apple-touch-icon" sizes="57x57" href="./webapp/app_icon_114.png" />
-	<link rel="apple-touch-icon" sizes="114x114" href="./webapp/app_icon_114.png" />
-	<link rel="apple-touch-icon" sizes="72x72" href="./webapp/app_icon_144.png" />
-	<link rel="apple-touch-icon" sizes="144x144" href="./webapp/app_icon_144.png" />
-	<link rel="apple-touch-icon" href="./webapp/app_icon_192.png" />
 
 	<!-- cache -->
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Expires" content="0" />
 
-	<!-- social network metatags -->	
-	<meta name="twitter:site" content="@marc_robledo">
-	<meta name="twitter:creator" content="@marc_robledo">
-	<meta name="twitter:domain" content="marcrobledo.com">
-	<meta property="og:title" content="Rom Patcher JS">
-	<meta name="twitter:title" content="Rom Patcher JS">
-	<meta name="twitter:description" content="An online web-based ROM patcher. Supported formats: IPS, BPS, UPS, APS, RUP, EBP, PPF and xdelta.">
-	<meta property="og:image" content="https://www.marcrobledo.com/RomPatcher.js/webapp/thumbnail.jpg">
-	<meta name="twitter:image" content="https://www.marcrobledo.com/RomPatcher.js/webapp/thumbnail.jpg">
-	<meta name="twitter:card" content="photo">
-
+	<!-- CSS -->
 	<link type="text/css" rel="stylesheet" href="./webapp/style.css" media="all"/>
+	<style>
+		#rom-patcher-select-patch {
+			width: 100%;
+		}
+		#rom-patcher-select-patch.single {
+			background-image: none;
+			cursor: default;
+		}
+		#switch-container, #patch-builder-container, #donation-info, #button-settings {
+			display: none !important;
+		}
+	</style>
 
+	<!-- Rom Patcher JS -->
 	<script type="text/javascript" src="./rom-patcher-js/RomPatcher.webapp.js"></script>
-	<script type="text/javascript" src="./webapp/webapp.js"></script>
+	<script type="text/javascript">
+		window.addEventListener('load', function (evt) {
+			try {
+				RomPatcherWeb.initialize({
+					language: 'en',
+					requireValidation: false,
+					outputSuffix: true,
+					fixChecksum: false,
+					allowDropFiles: true
+				}, {
+					file: './Wario Land 4 (Thai).ips',
+					name: 'Wario Land 4 (ภาษาไทย)',
+					description: 'ม็อดแปลภาษาไทย Wario Land 4 (GBA)',
+					outputName: 'Wario Land 4 (Thai)'
+				});
+			} catch (err) {
+				var message = err.message;
+				if (/incompatible browser/i.test(message) || /variable RomPatcherWeb/i.test(message))
+					message = 'Your browser is outdated and it is not compatible with this app.';
+
+				document.getElementById('rom-patcher-container').innerHTML = message;
+				document.getElementById('rom-patcher-container').style.color = 'red';
+			}
+		});
+	</script>
 </head>
 <body><div id="column">
 
-
 <!-- HEADER -->
-<header><img src="./webapp/logo.png" loading="lazy" /><h1>Wario Land 4 - ม็อดแปลไทย</h1></header>
-
-<!-- ลบกล่อง Donate ออกไปแล้ว -->
+<header><img src="./webapp/logo.png" loading="lazy" /><h1>Wario Land 4 (Thai)</h1></header>
 
 <!-- APP -->
 <div id="wrapper">
-	<div id="switch-container"><span id="switch-create-button" class="btn-transparent"><span data-localize="yes">Creator mode</span> <span id="switch-create" class="switch disabled"></span></span></div>
-
 	<div class="tab">
 		<div id="rom-patcher-container">
 			<div class="row m-b" id="rom-patcher-row-file-rom">
@@ -85,7 +100,7 @@
 			<div class="row m-b" id="rom-patcher-row-file-patch">
 				<div class="text-right"><label for="rom-patcher-input-file-patch" data-localize="yes">Patch file:</label></div>
 				<div class="rom-patcher-container-input">
-					<input type="file" id="rom-patcher-input-file-patch" class="empty" accept=".ips,.ups,.bps,.aps,.rup,.ppf,.ebp,.bdf,.bspatch,.mod,.xdelta,.vcdiff,.zip" disabled />
+					<select id="rom-patcher-select-patch"></select>
 				</div>
 			</div>
 			<div class="row m-b" id="rom-patcher-row-patch-description">
@@ -102,124 +117,12 @@
 				<button id="rom-patcher-button-apply" data-localize="yes" disabled>Apply patch</button>
 			</div>
 		</div>
-
-		<div id="patch-builder-container" style="display:none">
-			<div class="row m-b">
-				<div class="text-right"><label for="patch-builder-input-file-original" data-localize="yes" >Original ROM:</label></div>
-				<div>
-					<input type="file" id="patch-builder-input-file-original" class="empty" disabled />
-				</div>
-			</div>
-
-			<div class="row m-b">
-				<div class="text-right"><label for="patch-builder-input-file-modified" data-localize="yes">Modified ROM:</label></div>
-				<div>
-					<input type="file" id="patch-builder-input-file-modified" class="empty" disabled />
-				</div>
-			</div>
-
-			<div class="row m-b">
-				<div class="text-right"><label for="patch-builder-select-patch-type" data-localize="yes">Patch type:</label></div>
-				<div>
-					<select id="patch-builder-select-patch-type" disabled>
-						<option value="ips">IPS</option>
-						<option value="bps">BPS</option>
-						<option value="ppf">PPF</option>
-						<option value="ups">UPS</option>
-						<option value="aps">APS</option>
-						<option value="rup">RUP</option>
-						<option value="ebp">EBP</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="row">
-				<div></div>
-				<div id="patch-builder-container-metadata-inputs"></div>
-			</div>
-
-			<div class="buttons text-center">
-				<div id="patch-builder-row-error-message" class="m-b"><span id="patch-builder-error-message"></span></div>
-				<button id="patch-builder-button-create" disabled data-localize="yes" disabled>Create patch</button>
-			</div>
-		</div>
 	</div>
-
-
-
 </div>
-
-
-
-
 
 <!-- FOOTER -->
 <footer>
-	<div>
-		<button id="button-settings" class="btn-transparent"><img src="./webapp/icon_settings.svg" loading="lazy" class="icon settings" /> <span data-localize="yes">Settings</span></button>
-	</div>
-
-	<strong>Rom Patcher JS <small>v3.3.1</small></strong> by <a href="/">Marc Robledo</a>
-	<br />
-	<img src="./webapp/icon_github.svg" loading="lazy" class="icon github" /> <a href="https://github.com/marcrobledo/RomPatcher.js/" target="_blank">See on GitHub</a>
+	<strong>Rom Patcher JS</strong> by <a href="https://github.com/marcrobledo/RomPatcher.js/" target="_blank">Marc Robledo</a>
 </footer>
-
-
-
-
-<!-- SETTINGS DIALOG -->
-<dialog id="dialog-settings" class="rom-patcher-dialog">
-	<div class="text-right m-b"><img id="dialog-settings-button-close" src="./webapp/icon_close.svg" loading="lazy" /></div>
-
-	<div class="row m-b">
-		<div><label for="settings-language">Language</label></div>
-		<div class="text-right">
-			<select id="settings-language" class="enabled">
-				<option value="en">English</option>
-				<option value="fr">Français</option>
-				<option value="de">Deutsch</option>
-				<option value="it">Italiano</option>
-				<option value="es">Español</option>
-				<option value="nl">Nederlands</option>
-				<option value="sv">Svenska</option>
-				<option value="ca">Català</option>
-				<option value="ca-va">Valencià</option>
-				<option value="pt-br">Português Brasileiro</option>
-				<option value="ru">Russian</option>
-				<option value="ja">日本語</option>
-				<option value="zh-cn">中文（简体）</option>
-				<option value="zh-tw">中文（正體）</option>
-			</select>
-		</div>
-	</div>
-
-	<div class="row row-lg m-b">
-		<div><label data-localize="yes" for="settings-output-suffix">Use patch name for output</label></div>
-		<div class="text-right"><input type="checkbox" id="settings-output-suffix" class="styled" /></div>
-	</div>
-
-	<div class="row row-lg m-b">
-		<div><label data-localize="yes" for="settings-fix-checksum">Fix ROM checksum</label></div>
-		<div class="text-right"><input type="checkbox" id="settings-fix-checksum" class="styled" /></div>
-	</div>
-
-	<div class="row row-lg">
-		<div><label data-localize="yes" for="settings-light-theme">Light theme</label></div>
-		<div class="text-right"><input type="checkbox" id="settings-light-theme" class="styled" /></div>
-	</div>
-</dialog>
-
-<!-- เพิ่มโค้ด Custom Patcher ตรงนี้ -->
-<script>
-window.customPatcherConfig = [
-    {
-        name: "Wario Land 4 - Thai Translation",
-        patch: "Wario Land 4 (Thai).ips",
-        game: "Wario Land 4",
-        rom: "Wario Land 4 (USA, Europe).gba",
-        format: "ips"
-    }
-];
-</script>
 
 </body></html>
