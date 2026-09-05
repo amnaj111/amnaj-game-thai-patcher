@@ -82,7 +82,7 @@
 				patchName: 'Wario Land 4 (Thai)',
 				description: 'ม็อดแปลภาษาไทยสำหรับ Wario Land 4',
 				outputName: 'Wario Land 4 (Thai) AMNAJ',
-				inputCrc32: 0xd6141609,
+				inputCrc32: 'd6141609',
 				inputMd5: '5fe47355a33e3fabec2a1607af88a404',
 				enabled: true
 			},
@@ -93,7 +93,7 @@
 				patchName: 'Advance Wars (Thai)16MB',
 				description: 'ม็อดแปลภาษาไทยสำหรับ Advance Wars (Thai)16MB',
 				outputName: 'Advance Wars (USA) (Rev 1) AMNAJ',
-				inputCrc32: 0x26fd0fc9,
+				inputCrc32: '26fd0fc9',
 				enabled: false
 			},
 
@@ -103,7 +103,7 @@
 				patchName: 'Wario Land 4 (Thai)',
 				description: 'ม็อดแปลภาษาไทยสำหรับ Wario Land 4 (Thai)',
 				outputName: 'Wario Land 4 (USA, Europe) AMNAJ',
-				inputCrc32: 0xd6141609,
+				inputCrc32: 'd6141609',
 				enabled: true
 			}
 		};
@@ -201,7 +201,8 @@
 					name: game.patchName,
 					description: game.description,
 					outputName: game.outputName,
-					inputCrc32: game.inputCrc32
+					inputCrc32: game.inputCrc32,
+					inputMd5: game.inputMd5
 				});
 			} catch (error) {
 				const container = document.getElementById('rom-patcher-container');

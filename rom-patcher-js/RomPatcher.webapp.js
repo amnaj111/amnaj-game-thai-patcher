@@ -137,7 +137,7 @@ const RomPatcherWeb = (function () {
 					if (typeof crc32 === 'string' && /^(0x)?[0-9a-fA-F]{8}$/i.test(crc32.trim())) {
 						acc.push(parseInt(crc32.trim().replace('0x', ''), 16));
 					} else if (typeof crc32 === 'number') {
-						acc.push((crc32 >>> 0) & 0xffffffff);
+						acc.push(crc32 >>> 0);
 					} else {
 						console.warn('Rom Patcher JS: invalid inputCrc32 value');
 					}
@@ -905,7 +905,7 @@ const RomPatcherWeb = (function () {
 										var line = document.createElement('div');
 										if (typeof value !== 'string') {
 											if (validationInfo.type === 'CRC32') {
-												value = value.toString(16);
+												value = (value >>> 0).toString(16);
 												while (value.length < 8)
 													value = '0' + value;
 											} else {
