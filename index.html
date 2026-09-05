@@ -75,7 +75,7 @@
 
 	<script>
 		/* ข้อมูลเกมและแพตช์ทั้งหมด */
-						const games = {
+								const games = {
 			wario: {
 				title: 'Wario Land 4 (ภาษาไทย)',
 				patchFile: './Wario Land 4 (Thai).ips',
@@ -95,6 +95,16 @@
 				outputName: 'Advance Wars (USA) (Rev 1) AMNAJ',
 				inputCrc32: 0x26fd0fc9,
 				enabled: false
+			},
+
+			warioland4thai: {
+				title: 'Wario Land 4 (Thai) (ภาษาไทย)',
+				patchFile: './Wario Land 4 (Thai).ips',
+				patchName: 'Wario Land 4 (Thai)',
+				description: 'ม็อดแปลภาษาไทยสำหรับ Wario Land 4 (Thai)',
+				outputName: 'Wario Land 4 (USA, Europe) AMNAJ',
+				inputCrc32: 0xd6141609,
+				enabled: true
 			}
 		};
 
@@ -219,6 +229,7 @@
 
 			<select id="game-selector">
 				<option value="wario">Wario Land 4 (ภาษาไทย)</option>
+				<option value="warioland4thai">Wario Land 4 (Thai) (ภาษาไทย)</option>
 			</select>
 		</div>
 
