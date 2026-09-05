@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html translate="no">
 <head>
-	<title>Wario Land 4 (ภาษาไทย) - Rom Patcher</title>
+	<title>GBA Thai Translation Patches - Rom Patcher</title>
 	<meta http-equiv="content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="description" content="An online web-based ROM patcher for Wario Land 4 (Thai)."/>
+	<meta name="description" content="An online web-based ROM patcher for GBA Thai translations."/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 	<link rel="manifest" href="./manifest.json"/>
 	<link rel="shortcut icon" href="./webapp/app_icon_16.png" type="image/png" sizes="16x16"/>
@@ -40,12 +40,20 @@
 					outputSuffix: true,
 					fixChecksum: false,
 					allowDropFiles: true
-				}, {
-					file: './Wario Land 4 (Thai).ips',
-					name: 'Wario Land 4 (ภาษาไทย)',
-					description: 'ม็อดแปลภาษาไทย Wario Land 4 (GBA)',
-					outputName: 'Wario Land 4 (Thai) AMNAJ'
-				});
+				}, [
+					{
+						file: './Wario Land 4 (Thai).ips',
+						name: 'Wario Land 4 (ภาษาไทย)',
+						description: 'ม็อดแปลภาษาไทย Wario Land 4 (GBA)',
+						outputName: 'Wario Land 4 (Thai) AMNAJ'
+					},
+					{
+						file: './Advance Wars (Thai)16MB.ips',
+						name: 'Advance Wars (ภาษาไทย Rev 1)',
+						description: 'ม็อดแปลภาษาไทย Advance Wars (GBA)',
+						outputName: 'Advance Wars (Thai) AMNAJ'
+					}
+				]);
 			} catch (err) {
 				var message = err.message;
 				if (/incompatible browser/i.test(message) || /variable RomPatcherWeb/i.test(message))
@@ -60,7 +68,7 @@
 <body><div id="column">
 
 <!-- HEADER -->
-<header><img src="./webapp/logo.png" loading="lazy" /><h1>Wario Land 4 (Thai)</h1></header>
+<header><img src="./webapp/logo.png" loading="lazy" /><h1>GBA Thai Patches</h1></header>
 
 <!-- APP -->
 <div id="wrapper">
